@@ -109,10 +109,12 @@
     <properties>
         <!-- Build Properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.sourceJavaVersion>1.7</project.build.sourceJavaVersion>
-        <project.build.targetJavaVersion>1.7</project.build.targetJavaVersion>
+        <project.build.sourceJavaVersion>1.8</project.build.sourceJavaVersion>
+        <project.build.targetJavaVersion>1.8</project.build.targetJavaVersion>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-        <timestamp>${maven.build.timestamp}</timestamp> <!-- WORKAROUND: Make maven.build.timestamp property available in resource filtering, see http://jira.codehaus.org/browse/MRESOURCES-99 -->
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <rundir>${basedir}\target\${project.artifactId}-${project.version}</rundir>
+        <!-- WORKAROUND: Make maven.build.timestamp property available in resource filtering, see http://jira.codehaus.org/browse/MRESOURCES-99 -->
 
         <!-- Dependency Versions (run "mvn versions:display-property-updates" to check for updates) -->
         <common.dbcp.version>1.4</common.dbcp.version>
@@ -165,6 +167,8 @@
         <tomcat7.plugin.version>2.2</tomcat7.plugin.version>
         <versions.plugin.version>2.1</versions.plugin.version>
         <war.plugin.version>2.4</war.plugin.version>
+        
+        
     </properties>
 
     <dependencies>
@@ -275,7 +279,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
             <version>${logback.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- QueryDSL -->
@@ -470,6 +473,10 @@
                     <include>application_*.properties</include>
                 </includes>
             </resource>
+            <resource>
+				<directory>src/main/webapp</directory>
+				<targetPath>${rundir}</targetPath>
+			</resource>
         </resources>
 
         <plugins>
@@ -799,5 +806,6 @@
             <id>restlet</id>
             <url>http://maven.restlet.org</url>
         </repository>
+        
     </repositories>
 </project>

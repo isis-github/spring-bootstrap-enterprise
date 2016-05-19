@@ -55,7 +55,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcherServlet =
                 servletContext.addServlet("dispatcherServlet", new DispatcherServlet(appContext));
         dispatcherServlet.setLoadOnStartup(1);
-        dispatcherServlet.addMapping("/");
+        dispatcherServlet.addMapping("/*");
 
         // Add data to Logback MDC
         FilterRegistration.Dynamic mdcInsertingServletFilter =

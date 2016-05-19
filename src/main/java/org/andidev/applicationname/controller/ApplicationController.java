@@ -45,11 +45,13 @@ public class ApplicationController {
 
     @RequestMapping({"/"})
     public String root(Model model) {
+    	log.info("/");
         return "redirect:/home";
     }
 
     @RequestMapping({"/home"})
     public String home(Model model, HttpServletRequest request) {
+    	log.info("/home");
         if (hasRole(ROLE_USER)) {
             return "pages/userhome";
         } else {
